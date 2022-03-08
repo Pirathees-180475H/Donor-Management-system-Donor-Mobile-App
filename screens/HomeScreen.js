@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View,Button, Dimensions ,Image} from 'react-native';
+import { StyleSheet, Text, View, Dimensions ,Image} from 'react-native';
 import MapView,{Marker,Callout} from 'react-native-maps';
 import { useState ,useEffect} from 'react';
 import * as Location from 'expo-location';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 export default HomeScreen=({navigation})=> {
