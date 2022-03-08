@@ -8,15 +8,18 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 //Screens
 import MainTabScreen from './screens/MainTabScreen';
 
+//Landing And Login,Register
+import LandingScreen from './screens/LandingScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator(); //For stack Navigation
 const Drawer = createDrawerNavigator(); //For Drawer Navigation
 const Tab = createMaterialBottomTabNavigator(); //Bottom Navigation
 
-function App() {
-  return (
-    <NavigationContainer>
-       <Drawer.Navigator screenOptions={{
+const ContentScreens =()=>{
+  return(
+        <Drawer.Navigator screenOptions={{
           headerStyle:{
               backgroundColor:"#c23616"
           },
@@ -25,8 +28,24 @@ function App() {
             fontWeight:"bold"
           }
         }}>
+          
           <Drawer.Screen name="Donor Home" component={MainTabScreen}  options={{title:"All Camps"}}/>
       </Drawer.Navigator>
+  )
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator  screenOptions={{
+              headerShown: false
+            }}>
+            <Stack.Screen name="LandingScreen" component={LandingScreen}/>
+            <Stack.Screen name="LoginScreen" component={LoginScreen}/>
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen}/>
+            <Stack.Screen name="Contents" component={ContentScreens} options={{title:"Home"}}/>
+      </Stack.Navigator>
+      
 
      {/*  <Stack.Navigator screenOptions={{
           headerStyle:{
