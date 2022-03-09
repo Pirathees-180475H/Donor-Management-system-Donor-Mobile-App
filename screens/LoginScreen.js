@@ -1,4 +1,4 @@
-import { StyleSheet, Text,Animated, View,Button,Dimensions,Image,TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text,Animated, StatusBar,View,Button,Dimensions,Image,TouchableOpacity, TextInput } from 'react-native';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,6 +12,7 @@ export default LoginScreen=({navigation})=> {
   const [isEmailValid,setEmailValid]=useState(false);
   const[isPasswordValid,setPasswordValid]=useState(false);
   const [isPasswordVisible,setPasswordVisible]=useState(false);
+  const [isAuth,setIsAuth]=useState(true);     // Check Login Or Not
 
   
 
@@ -31,11 +32,12 @@ export default LoginScreen=({navigation})=> {
 
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor='#c0392b' barStyle="light-content"/>
         <View style={styles.header}>
-          <Text style={styles.text_header}>Welcome To D:HUB</Text>
+          <Text style={styles.text_header}>Log In To D:HUB</Text>
         </View>
 
-        <View style={styles.footer}>
+        <Animatable.View style={styles.footer} animation="bounceIn">
           <Text style={styles.text_footer} >Login</Text>
             <View style={styles.action}>
               <MaterialCommunityIcons name="account" color="#c0392b" size={26} />
@@ -45,13 +47,15 @@ export default LoginScreen=({navigation})=> {
                   onChangeText={(value)=>changeHandler(value,"Email")}
                   autoCapitalize="none"
                   />
+                  <Animatable.View animation="bounceIn">
                   {isEmailValid ? <MaterialCommunityIcons name="check-circle" color="#4cd137" size={26} />
                   : <MaterialCommunityIcons name="close-circle" color="#c0392b" size={26} />}
-
+                  </Animatable.View>
                   
              
             </View>
             <Text style={[styles.text_footer,{marginTop:25}]} >PassWord</Text>
+
             <View style={[styles.action]}>
               <MaterialCommunityIcons name="lock" color="#c0392b" size={26} />
                   <TextInput
@@ -61,11 +65,46 @@ export default LoginScreen=({navigation})=> {
                   onChangeText={(value)=>changeHandler(value,"Password")}
                   autoCapitalize="none"
                   />
+                   <Animatable.View animation="bounceIn">
                   {isPasswordVisible ? <MaterialCommunityIcons name="eye" color="#4cd137" size={26} onPress={togglePasswordVisible} />
                 : <MaterialCommunityIcons name="eye-off" color="#c0392b" size={26} onPress={togglePasswordVisible}/>}
-
+                  </Animatable.View>
             </View>
-        </View>
+
+            <View style={styles.button}>
+                <TouchableOpacity
+                      style={[styles.signIn,{marginTop:0}]}
+                      onPress={()=>{isAuth?navigation.navigate("Contents"):null}}
+                  >
+                  <LinearGradient
+                      colors={['#e67e22', '#c0392b']}
+                      style={styles.signIn}
+                  >
+                      <Text style={[styles.textSign, {
+                          color:'#fff'
+                      }]}>Log In</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+            </View>
+
+            
+            <View style={[styles.button,{marginTop:15}]}>
+                <TouchableOpacity
+                      style={styles.signIn}
+                      onPress={() =>navigation.navigate("RegisterScreen")}
+                  >
+                  <LinearGradient
+                      colors={['#e74c3c', '#e67e22']}
+                      style={styles.signIn}
+                  >
+                      <Text style={[styles.textSign, {
+                          color:'#fff'
+                      }]}>Register</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+            </View>
+
+        </Animatable.View>
 
       </View>
       

@@ -16,7 +16,7 @@ export default LandingScreen=({navigation})=> {
                     source={require("../assets/logo.png")}/>
         </View>
 
-            <Animatable.View style={styles.footer}>
+            <Animatable.View style={styles.footer} animation="wobble">
                 <Text style={styles.title}>Welcome To Donor HUB</Text>
                 <Text style={styles.text}>Lets JOIN</Text>
 
