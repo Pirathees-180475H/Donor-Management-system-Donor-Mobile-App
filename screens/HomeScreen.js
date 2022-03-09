@@ -9,6 +9,7 @@ export default HomeScreen=({navigation})=> {
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRegion,setMapRegion]=useState(null);
 
+  //Needs Clean Ups When Calls 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -18,7 +19,7 @@ export default HomeScreen=({navigation})=> {
       }
       let location = await Location.getCurrentPositionAsync({}); //Get Current Position Of the Phone
       setLocation(location);
-      console.log(location)
+
       setMapRegion({
         longitude:location.coords.longitude,
         latitude:location.coords.latitude,
@@ -27,6 +28,9 @@ export default HomeScreen=({navigation})=> {
       })
 
     })();
+
+    //Clean Up Function To avoid Memory Leaks
+    return()=>{console.log('clean Up')}
   }, []);
 
 
