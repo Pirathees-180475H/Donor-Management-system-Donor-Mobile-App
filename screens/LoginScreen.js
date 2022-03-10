@@ -1,4 +1,4 @@
-import { StyleSheet, Text,Animated, StatusBar,View,Button,Dimensions,Image,TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text,Animated,Alert,StatusBar,View,Button,Dimensions,Image,TouchableOpacity, TextInput } from 'react-native';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -30,6 +30,14 @@ export default LoginScreen=({navigation})=> {
     setPasswordVisible(!isPasswordVisible);
   }
 
+  const LoginHandler =()=>{
+    if(isAuth){
+      navigation.navigate("Contents");
+    }else{
+      Alert.alert("Invalid Attempt","Error Message From Firebase",[{text:"OK"}])
+    }
+  }
+
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor='#c0392b' barStyle="light-content"/>
@@ -51,9 +59,8 @@ export default LoginScreen=({navigation})=> {
                   {isEmailValid ? <MaterialCommunityIcons name="check-circle" color="#4cd137" size={26} />
                   : <MaterialCommunityIcons name="close-circle" color="#c0392b" size={26} />}
                   </Animatable.View>
-                  
-             
             </View>
+                 
             <Text style={[styles.text_footer,{marginTop:25}]} >PassWord</Text>
 
             <View style={[styles.action]}>
@@ -74,7 +81,7 @@ export default LoginScreen=({navigation})=> {
             <View style={styles.button}>
                 <TouchableOpacity
                       style={[styles.signIn,{marginTop:0}]}
-                      onPress={()=>{isAuth?navigation.navigate("Contents"):null}}
+                     onPress={()=>LoginHandler()}
                   >
                   <LinearGradient
                       colors={['#e67e22', '#c0392b']}
